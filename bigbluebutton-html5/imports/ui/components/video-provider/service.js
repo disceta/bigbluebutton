@@ -52,9 +52,9 @@ class VideoService {
 
     this.updateNumberOfDevices = this.updateNumberOfDevices.bind(this);
     // Safari doesn't support ondevicechange
-    if (!this.isSafari) {
-      navigator.mediaDevices.ondevicechange = (event) => this.updateNumberOfDevices();
-    }
+    // if (!this.isSafari) {
+    // navigator.mediaDevices.ondevicechange = (event) => this.updateNumberOfDevices();
+    // }
     this.updateNumberOfDevices();
   }
 
@@ -81,8 +81,8 @@ class VideoService {
 
   fetchNumberOfDevices(devices) {
     const deviceIds = [];
-    devices.forEach(d => {
-      const validDeviceId = d.deviceId !== '' && !deviceIds.includes(d.deviceId)
+    devices.forEach((d) => {
+      const validDeviceId = d.deviceId !== '' && !deviceIds.includes(d.deviceId);
       if (d.kind === 'videoinput' && validDeviceId) {
         deviceIds.push(d.deviceId);
       }
@@ -95,9 +95,9 @@ class VideoService {
     if (devices) {
       this.numberOfDevices = this.fetchNumberOfDevices(devices);
     } else {
-      navigator.mediaDevices.enumerateDevices().then(devices => {
-        this.numberOfDevices = this.fetchNumberOfDevices(devices);
-      });
+      // navigator.mediaDevices.enumerateDevices().then(devices => {
+      // this.numberOfDevices = this.fetchNumberOfDevices(devices);
+      // });
     }
   }
 
@@ -170,11 +170,11 @@ class VideoService {
     return Auth.authenticateURL(SFU_URL);
   }
 
-  isPaginationEnabled () {
+  isPaginationEnabled() {
     return PAGINATION_ENABLED && (this.getMyPageSize() > 0);
   }
 
-  setNumberOfPages (numberOfPublishers, numberOfSubscribers, pageSize) {
+  setNumberOfPages(numberOfPublishers, numberOfSubscribers, pageSize) {
     // Page size 0 means no pagination, return itself
     if (pageSize === 0) return pageSize;
 
@@ -194,25 +194,25 @@ class VideoService {
     return this.numberOfPages;
   }
 
-  getNumberOfPages () {
+  getNumberOfPages() {
     return this.numberOfPages;
   }
 
-  setCurrentVideoPageIndex (newVideoPageIndex) {
+  setCurrentVideoPageIndex(newVideoPageIndex) {
     if (this.currentVideoPageIndex !== newVideoPageIndex) {
       this.currentVideoPageIndex = newVideoPageIndex;
     }
   }
 
-  getCurrentVideoPageIndex () {
+  getCurrentVideoPageIndex() {
     return this.currentVideoPageIndex;
   }
 
-  calculateNextPage () {
+  calculateNextPage() {
     return ((this.currentVideoPageIndex + 1) % this.numberOfPages + this.numberOfPages) % this.numberOfPages;
   }
 
-  calculatePreviousPage () {
+  calculatePreviousPage() {
     return ((this.currentVideoPageIndex - 1) % this.numberOfPages + this.numberOfPages) % this.numberOfPages;
   }
 
@@ -228,7 +228,7 @@ class VideoService {
     return this.currentVideoPageIndex;
   }
 
-  getMyPageSize () {
+  getMyPageSize() {
     const myRole = this.getMyRole();
     const pageSizes = !this.isMobile ? DESKTOP_PAGE_SIZES : MOBILE_PAGE_SIZES;
 
@@ -237,14 +237,14 @@ class VideoService {
         return pageSizes.moderator;
       case ROLE_VIEWER:
       default:
-        return pageSizes.viewer
+        return pageSizes.viewer;
     }
   }
 
-  getVideoPage (streams, pageSize) {
+  getVideoPage(streams, pageSize) {
     // Publishers are taken into account for the page size calculations. They
     // also appear on every page.
-    const [mine, others] = _.partition(streams, (vs => { return Auth.userID === vs.userId; }));
+    const [mine, others] = _.partition(streams, (vs => Auth.userID === vs.userId));
     // Recalculate total number of pages
     this.setNumberOfPages(mine.length, others.length, pageSize);
     const paginatedStreams = _.chunk(others, pageSize)[this.currentVideoPageIndex] || [];
@@ -282,7 +282,7 @@ class VideoService {
     // which produces the original non paginated behaviour
     if (!PAGINATION_ENABLED || pageSize === 0) {
       return mappedStreams;
-    };
+    }
 
     const paginatedStreams = this.getVideoPage(mappedStreams, pageSize);
     return paginatedStreams;
@@ -329,7 +329,7 @@ class VideoService {
     return streams.find(s => s.stream === stream);
   }
 
-  getMyRole () {
+  getMyRole() {
     return Users.findOne({ userId: Auth.userID },
       { fields: { role: 1 } }).role;
   }
@@ -398,8 +398,8 @@ class VideoService {
       {
         meetingId: Auth.meetingID,
         userId: Auth.userID,
-        deviceId: deviceId
-      }, { fields: { stream: 1 } }
+        deviceId,
+      }, { fields: { stream: 1 } },
     );
     return videoStream ? videoStream.stream : null;
   }
@@ -525,17 +525,17 @@ class VideoService {
     return VideoStreams.find({ meetingId: Auth.meetingID }).count();
   }
 
-  isProfileBetter (newProfileId, originalProfileId) {
+  isProfileBetter(newProfileId, originalProfileId) {
     return CAMERA_PROFILES.findIndex(({ id }) => id === newProfileId)
       > CAMERA_PROFILES.findIndex(({ id }) => id === originalProfileId);
   }
 
-  applyBitrate (peer, bitrate) {
+  applyBitrate(peer, bitrate) {
     const peerConnection = peer.peerConnection;
     if ('RTCRtpSender' in window
       && 'setParameters' in window.RTCRtpSender.prototype
       && 'getParameters' in window.RTCRtpSender.prototype) {
-      peerConnection.getSenders().forEach(sender => {
+      peerConnection.getSenders().forEach((sender) => {
         const { track } = sender;
         if (track && track.kind === 'video') {
           const parameters = sender.getParameters();
@@ -554,21 +554,21 @@ class VideoService {
                   extraInfo: { bitrate },
                 }, `Bitrate changed: ${bitrate}`);
               })
-              .catch(error => {
+              .catch((error) => {
                 logger.warn({
                   logCode: 'video_provider_bitratechange_failed',
                   extraInfo: { bitrate, errorMessage: error.message, errorCode: error.code },
-                }, `Bitrate change failed.`);
+                }, 'Bitrate change failed.');
               });
           }
         }
-      })
+      });
     }
   }
 
   // Some browsers (mainly iOS Safari) garble the stream if a constraint is
   // reconfigured without propagating previous height/width info
-  reapplyResolutionIfNeeded (track, constraints) {
+  reapplyResolutionIfNeeded(track, constraints) {
     if (typeof track.getSettings !== 'function') {
       return constraints;
     }
@@ -579,21 +579,20 @@ class VideoService {
       return {
         ...constraints,
         width: trackSettings.width,
-        height: trackSettings.height
+        height: trackSettings.height,
       };
-    } else {
-      return constraints;
     }
+    return constraints;
   }
 
-  applyCameraProfile (peer, profileId) {
+  applyCameraProfile(peer, profileId) {
     const profile = CAMERA_PROFILES.find(targetProfile => targetProfile.id === profileId);
 
     if (!profile) {
       logger.warn({
         logCode: 'video_provider_noprofile',
         extraInfo: { profileId },
-      }, `Apply failed: no camera profile found.`);
+      }, 'Apply failed: no camera profile found.');
       return;
     }
 
@@ -611,10 +610,10 @@ class VideoService {
     }
 
     if (constraints && typeof constraints === 'object') {
-      peer.peerConnection.getSenders().forEach(sender => {
+      peer.peerConnection.getSenders().forEach((sender) => {
         const { track } = sender;
-        if (track && track.kind === 'video' && typeof track.applyConstraints  === 'function') {
-          let normalizedVideoConstraints = this.reapplyResolutionIfNeeded(track, constraints);
+        if (track && track.kind === 'video' && typeof track.applyConstraints === 'function') {
+          const normalizedVideoConstraints = this.reapplyResolutionIfNeeded(track, constraints);
           track.applyConstraints(normalizedVideoConstraints)
             .then(() => {
               logger.info({
@@ -623,7 +622,7 @@ class VideoService {
               }, `New camera profile applied: ${profileId}`);
               peer.currentProfileId = profileId;
             })
-            .catch(error => {
+            .catch((error) => {
               logger.warn({
                 logCode: 'video_provider_profile_apply_failed',
                 extraInfo: { errorName: error.name, errorCode: error.code },
@@ -634,11 +633,11 @@ class VideoService {
     }
   }
 
-  getThreshold (numberOfPublishers) {
+  getThreshold(numberOfPublishers) {
     let targetThreshold = { threshold: 0, profile: 'original' };
     let finalThreshold = { threshold: 0, profile: 'original' };
 
-    for(let mapIndex = 0; mapIndex < CAMERA_QUALITY_THRESHOLDS.length; mapIndex++) {
+    for (let mapIndex = 0; mapIndex < CAMERA_QUALITY_THRESHOLDS.length; mapIndex++) {
       targetThreshold = CAMERA_QUALITY_THRESHOLDS[mapIndex];
       if (targetThreshold.threshold <= numberOfPublishers) {
         finalThreshold = targetThreshold;
@@ -679,11 +678,11 @@ export default {
   notify: message => notify(message, 'error', 'video'),
   updateNumberOfDevices: devices => videoService.updateNumberOfDevices(devices),
   applyCameraProfile: (peer, newProfile) => videoService.applyCameraProfile(peer, newProfile),
-  getThreshold: (numberOfPublishers) => videoService.getThreshold(numberOfPublishers),
+  getThreshold: numberOfPublishers => videoService.getThreshold(numberOfPublishers),
   isPaginationEnabled: () => videoService.isPaginationEnabled(),
   getNumberOfPages: () => videoService.getNumberOfPages(),
   getCurrentVideoPageIndex: () => videoService.getCurrentVideoPageIndex(),
   getPreviousVideoPage: () => videoService.getPreviousVideoPage(),
   getNextVideoPage: () => videoService.getNextVideoPage(),
-  getPageChangeDebounceTime: () => { return PAGE_CHANGE_DEBOUNCE_TIME },
+  getPageChangeDebounceTime: () => PAGE_CHANGE_DEBOUNCE_TIME,
 };
