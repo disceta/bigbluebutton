@@ -48,6 +48,7 @@
 //    - metadata
 //    - xml (for pre-upload of slides)
 //
+//public String createMeeting(String meetingID, String welcome, String moderatorPassword, String viewerPassword, Integer voiceBridge, String logoutURL, String externId) {
 public String createMeeting(String meetingID, String welcome, String moderatorPassword, String moderatorWelcomeMsg, String viewerPassword, Integer voiceBridge, String logoutURL) {
 	String base_url_create = BigBlueButtonURL + "api/create?";
 

@@ -213,24 +213,6 @@ class UserOptions extends PureComponent {
           onClick={toggleStatus}
         />) : null
       ),
-      (!meetingIsBreakout && isMeteorConnected ? (
-        <DropdownListItem
-          key={this.muteAllId}
-          icon={isMeetingMuted ? 'unmute' : 'mute'}
-          label={intl.formatMessage(intlMessages[isMeetingMuted ? 'unmuteAllLabel' : 'muteAllLabel'])}
-          description={intl.formatMessage(intlMessages[isMeetingMuted ? 'unmuteAllDesc' : 'muteAllDesc'])}
-          onClick={toggleMuteAllUsers}
-        />) : null
-      ),
-      (!meetingIsBreakout && !isMeetingMuted && isMeteorConnected ? (
-        <DropdownListItem
-          key={this.muteId}
-          icon="mute"
-          label={intl.formatMessage(intlMessages.muteAllExceptPresenterLabel)}
-          description={intl.formatMessage(intlMessages.muteAllExceptPresenterDesc)}
-          onClick={toggleMuteAllUsersExceptPresenter}
-        />) : null
-      ),
       (amIModerator
         ? (
           <DropdownListItem
@@ -250,35 +232,6 @@ class UserOptions extends PureComponent {
           onClick={() => mountModal(<LockViewersContainer />)}
         />) : null
       ),
-      (isMeteorConnected ? <DropdownListSeparator key={_.uniqueId('list-separator-')} /> : null),
-      (canCreateBreakout && isMeteorConnected ? (
-        <DropdownListItem
-          key={this.createBreakoutId}
-          icon="rooms"
-          label={intl.formatMessage(intlMessages.createBreakoutRoom)}
-          description={intl.formatMessage(intlMessages.createBreakoutRoomDesc)}
-          onClick={this.onCreateBreakouts}
-        />) : null
-      ),
-      (canInviteUsers && isMeteorConnected ? (
-        <DropdownListItem
-          icon="rooms"
-          label={intl.formatMessage(intlMessages.invitationItem)}
-          key={this.createBreakoutId}
-          onClick={this.onInvitationUsers}
-        />) : null
-      ),
-      (amIModerator && CaptionsService.isCaptionsEnabled() && isMeteorConnected
-        ? (
-          <DropdownListItem
-            icon="closed_caption"
-            label={intl.formatMessage(intlMessages.captionsLabel)}
-            description={intl.formatMessage(intlMessages.captionsDesc)}
-            key={this.captionsId}
-            onClick={this.handleCaptionsClick}
-          />
-        )
-        : null),
     ]);
 
     return this.menuItems;

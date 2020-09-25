@@ -1,0 +1,27 @@
+meetings
+{
+background-color: #ffffff;
+width: 100%;
+}
+meeting
+{
+display: block;
+margin-bottom: 30pt;
+margin-left: 0;
+}
+meetingID
+{
+color: #FF0000;
+font-size: 20pt;
+}
+startTime,endTime
+{
+color: #0000FF;
+font-size: 20pt;
+}
+participantCount,moderatorCount,attendees,running
+{
+Display: block;
+color: #000000;
+margin-left: 20pt;
+}

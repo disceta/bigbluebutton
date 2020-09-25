@@ -57,39 +57,16 @@ const Chat = (props) => {
           data-test="chatTitle"
           className={styles.title}
         >
-          <Button
-            onClick={() => {
-              Session.set('idChatOpen', '');
-              Session.set('openPanel', 'userlist');
-            }}
+          <h4
             aria-label={intl.formatMessage(intlMessages.hideChatLabel, { 0: title })}
             accessKey={HIDE_CHAT_AK}
             label={title}
             icon="left_arrow"
             className={styles.hideBtn}
-          />
+          >
+            {title}
+          </h4>
         </div>
-        {
-          chatID !== 'public'
-            ? (
-              <Button
-                icon="close"
-                size="sm"
-                ghost
-                color="dark"
-                hideLabel
-                onClick={() => {
-                  actions.handleClosePrivateChat(chatID);
-                  Session.set('idChatOpen', '');
-                  Session.set('openPanel', 'userlist');
-                }}
-                aria-label={intl.formatMessage(intlMessages.closeChatLabel, { 0: title })}
-                label={intl.formatMessage(intlMessages.closeChatLabel, { 0: title })}
-                accessKey={CLOSE_CHAT_AK}
-              />
-            )
-            : <ChatDropdown {...{ meetingIsBreakout, isMeteorConnected, amIModerator }} />
-        }
       </header>
       <MessageList
         id={ELEMENT_ID}

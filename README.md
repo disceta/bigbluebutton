@@ -1,3 +1,9 @@
+
+
+/usr/share/meteor/bundle/programs/server/assets/app/config/settings.yml
+
+
+
 BigBlueButton
 =============
 BigBlueButton is an open source web conferencing system.  

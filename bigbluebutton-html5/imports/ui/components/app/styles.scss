@@ -155,7 +155,7 @@
   }
 
   @include mq($medium-up) {
-    flex: 0 25vw;
+    /*flex: 0 25vw;*/
     order: 1;
   }
 
@@ -223,4 +223,12 @@
   padding: var(--bars-padding);
   position: relative;
   order: 3;
+}
+
+.userChatPanel {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd; 
+  justify-content: center;
+  align-items: stretch;
 }

@@ -9,7 +9,7 @@ import { defineMessages, injectIntl } from 'react-intl';
 import Icon from '../icon/component';
 import { styles } from './styles.scss';
 import Button from '../button/component';
-import RecordingIndicator from './recording-indicator/container';
+// import RecordingIndicator from './recording-indicator/container';
 import TalkingIndicatorContainer from '/imports/ui/components/nav-bar/talking-indicator/container';
 import SettingsDropdownContainer from './settings-dropdown/container';
 
@@ -115,10 +115,6 @@ class NavBar extends PureComponent {
           <div className={styles.center}>
             <h1 className={styles.presentationTitle}>{presentationTitle}</h1>
 
-            <RecordingIndicator
-              mountModal={mountModal}
-              amIModerator={amIModerator}
-            />
           </div>
           <div className={styles.right}>
             <SettingsDropdownContainer amIModerator={amIModerator} />

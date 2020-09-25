@@ -132,6 +132,7 @@
   > .message:first-child {
     margin-top: calc(var(--line-height-computed) / 4);
   }
+  order: 2;
 }
 
 .message, .hyperlink {

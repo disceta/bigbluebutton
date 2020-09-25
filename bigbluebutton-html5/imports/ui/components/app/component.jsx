@@ -209,6 +209,7 @@ class App extends Component {
     const { enableResize } = this.state;
     const { openPanel, isRTL } = this.props;
 
+    // logger.info({ logCode: 'renderPanel' }, openPanel);
     return (
       <PanelManager
         {...{
@@ -341,7 +342,6 @@ class App extends Component {
         <BreakoutRoomInvitation />
         <PollingContainer />
         <ModalContainer />
-        <AudioContainer />
         <ToastContainer rtl />
         <ChatAlertContainer />
         <WaitingNotifierContainer />

@@ -121,23 +121,6 @@ class ActionsDropdown extends PureComponent {
     } = intl;
 
     return _.compact([
-      (amIPresenter && isPollingEnabled
-        ? (
-          <DropdownListItem
-            icon="polling"
-            label={formatMessage(pollBtnLabel)}
-            description={formatMessage(pollBtnDesc)}
-            key={this.pollId}
-            onClick={() => {
-              if (Session.equals('pollInitiated', true)) {
-                Session.set('resetPollPanel', true);
-              }
-              Session.set('openPanel', 'poll');
-              Session.set('forcePollOpen', true);
-            }}
-          />
-        )
-        : null),
       (!amIPresenter
         ? (
           <DropdownListItem
@@ -158,18 +141,6 @@ class ActionsDropdown extends PureComponent {
             description={formatMessage(presentationDesc)}
             key={this.presentationItemId}
             onClick={this.handlePresentationClick}
-          />
-        )
-        : null),
-      (amIPresenter && allowExternalVideo
-        ? (
-          <DropdownListItem
-            icon="video"
-            label={!isSharingVideo ? intl.formatMessage(intlMessages.startExternalVideoLabel)
-              : intl.formatMessage(intlMessages.stopExternalVideoLabel)}
-            description="External Video"
-            key="external-video"
-            onClick={isSharingVideo ? stopExternalVideoShare : this.handleExternalVideoClick}
           />
         )
         : null),

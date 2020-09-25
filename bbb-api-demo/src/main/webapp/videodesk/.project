@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>rasteljsp</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>bigbluebutton.properties</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/grails-app/conf/bigbluebutton.properties</locationURI>
+		</link>
+		<link>
+			<name>deploy.sh</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/deploy.sh</locationURI>
+		</link>
+		<link>
+			<name>g</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/bigbluebutton-config/bin/g</locationURI>
+		</link>
+		<link>
+			<name>logging.properties</name>
+			<type>1</type>
+			<location>C:/Program Files/Apache Software Foundation/Tomcat 6.0/conf/logging.properties</location>
+		</link>
+		<link>
+			<name>n</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/bigbluebutton-config/bin/n</locationURI>
+		</link>
+	</linkedResources>
+</projectDescription>
