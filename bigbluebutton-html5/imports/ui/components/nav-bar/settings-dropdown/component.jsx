@@ -225,7 +225,7 @@ class SettingsDropdown extends PureComponent {
 
     return _.compact([
       this.getFullscreenItem(),
-      (<DropdownListItem
+      /*(<DropdownListItem
         key="list-item-settings"
         icon="settings"
         label={intl.formatMessage(intlMessages.settingsLabel)}
@@ -256,7 +256,7 @@ class SettingsDropdown extends PureComponent {
         label={intl.formatMessage(intlMessages.hotkeysLabel)}
         description={intl.formatMessage(intlMessages.hotkeysDesc)}
         onClick={() => mountModal(<ShortcutHelpComponent />)}
-      />),
+      />),*/
       (isMeteorConnected ? <DropdownListSeparator key={_.uniqueId('list-separator-')} /> : null),
       allowedToEndMeeting && isMeteorConnected
         ? (<DropdownListItem

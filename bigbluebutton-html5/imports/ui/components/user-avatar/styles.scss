@@ -17,7 +17,7 @@
 .avatar {
   position: relative;
   padding-bottom: 2rem;
-  border-radius: 50%;
+  /*border-radius: 50%;*/
   text-align: center;
   font-size: .85rem;
   border: 2px solid transparent;
@@ -108,7 +108,7 @@
 }
 
 .moderator {
-  border-radius: 5px;
+  border-radius: 50%;
 }
 
 .presenter {

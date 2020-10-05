@@ -146,34 +146,34 @@ class Settings extends Component {
         role="presentation"
         selectedTabPanelClassName={styles.selectedTab}
       >
-        <TabList className={styles.tabList}>
-          <Tab
+      {/*<TabList className={styles.tabList}>*/}
+          {/*<Tab
             className={styles.tabSelector}
             aria-labelledby="appTab"
             selectedClassName={styles.selected}
           >
             <Icon iconName="application" className={styles.icon} />
             <span id="appTab">{intl.formatMessage(intlMessages.appTabLabel)}</span>
-          </Tab>
+          </Tab>*/}
           {/* <Tab className={styles.tabSelector} aria-labelledby="videoTab"> */}
           {/* <Icon iconName='video' className={styles.icon}/> */}
           {/* <span id="videoTab">{intl.formatMessage(intlMessages.videoTabLabel)}</span> */}
           {/* </Tab> */}
-          <Tab
+          {/*<Tab
             className={styles.tabSelector}
             aria-labelledby="dataSavingTab"
             selectedClassName={styles.selected}
           >
             <Icon iconName="network" className={styles.icon} />
             <span id="dataSaving">{intl.formatMessage(intlMessages.dataSavingLabel)}</span>
-          </Tab>
+          </Tab>*/}
           {/* { isModerator ? */}
           {/* <Tab className={styles.tabSelector} aria-labelledby="usersTab"> */}
           {/* <Icon iconName="user" className={styles.icon} /> */}
           {/* <span id="usersTab">{intl.formatMessage(intlMessages.usersTabLabel)}</span> */}
           {/* </Tab> */}
           {/* : null } */}
-        </TabList>
+            {/* </TabList> */}
         <TabPanel className={styles.tabPanel}>
           <Application
             availableLocales={availableLocales}

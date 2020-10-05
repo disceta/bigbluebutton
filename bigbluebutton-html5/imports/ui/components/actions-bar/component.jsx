@@ -76,6 +76,19 @@ class ActionsBar extends PureComponent {
             : null
           }
         </div>
+        <div className={cx(actionBarClasses)}>
+          <DesktopShare {...{
+            handleShareScreen,
+            handleUnshareScreen,
+            isVideoBroadcasting,
+            amIPresenter,
+            screenSharingCheck,
+            screenShareEndAlert,
+            isMeteorConnected,
+            screenshareDataSavingSetting,
+          }}
+          />
+        </div>
         <div className={styles.right}>
           {isLayoutSwapped
             ? (

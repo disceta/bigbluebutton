@@ -269,23 +269,7 @@ class UserDropdown extends PureComponent {
 
     const { allowUserLookup } = Meteor.settings.public.app;
 
-    if (showNestedOptions && isMeteorConnected) {
-      if (allowedToChangeStatus) {
-        actions.push(this.makeDropdownItem(
-          'back',
-          intl.formatMessage(messages.backTriggerLabel),
-          () => this.setState(
-            {
-              showNestedOptions: false,
-              isActionsOpen: true,
-            }, Session.set('dropdownOpen', true),
-          ),
-          'left_arrow',
-        ));
-      }
-
-      actions.push(<DropdownListSeparator key={_.uniqueId('list-separator-')} />);
-
+    if (allowedToChangeStatus && isMeteorConnected && user.emoji == 'none') {
       const statuses = Object.keys(getEmojiList);
       statuses.map(status => actions.push(this.makeDropdownItem(
         status,
@@ -293,23 +277,6 @@ class UserDropdown extends PureComponent {
         () => { setEmojiStatus(user.userId, status); this.resetMenuState(); },
         getEmojiList[status],
       )));
-
-      return actions;
-    }
-
-    if (allowedToChangeStatus && isMeteorConnected) {
-      actions.push(this.makeDropdownItem(
-        'setstatus',
-        intl.formatMessage(messages.statusTriggerLabel),
-        () => this.setState(
-          {
-            showNestedOptions: true,
-            isActionsOpen: true,
-          }, Session.set('dropdownOpen', true),
-        ),
-        'user',
-        'right_arrow',
-      ));
     }
 
     const showChatOption = CHAT_ENABLED
@@ -619,7 +586,8 @@ class UserDropdown extends PureComponent {
       </div>
     );
 
-    if (!actions.length) return contents;
+    if (!actions.length) 
+      return contents;
 
     return (
       <Dropdown
