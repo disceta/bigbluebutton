@@ -223,7 +223,7 @@ class UserOptions extends PureComponent {
           />)
         : null
       ),
-      (!meetingIsBreakout && isMeteorConnected ? (
+      /*(!meetingIsBreakout && isMeteorConnected ? (
         <DropdownListItem
           key={this.lockId}
           icon="lock"
@@ -231,7 +231,7 @@ class UserOptions extends PureComponent {
           description={intl.formatMessage(intlMessages.lockViewersDesc)}
           onClick={() => mountModal(<LockViewersContainer />)}
         />) : null
-      ),
+      ),*/
     ]);
 
     return this.menuItems;

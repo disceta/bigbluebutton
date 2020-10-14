@@ -76,6 +76,17 @@
 			<td>
 				<input type="submit" value="Создать" /></td>
 		</tr>	
+
+		<tr>
+			<td>
+				&nbsp;</td>
+			<td style="text-align: right; ">
+				Сообщение в общем чате:</td>
+			<td style="width: 5px; ">
+				&nbsp;</td>
+			<td style="text-align: left ">
+				<input type="text" name="welcomeMsg" /></td>
+		</tr>
 	</tbody>
 </table>
 <INPUT TYPE=hidden NAME=action VALUE="create">
@@ -93,12 +104,12 @@
 		String username = request.getParameter("meetingID");
 		String meetingID = request.getParameter("meetingID");
 		String password = request.getParameter("moderatorPW");
-		String welcomeMsg = "Вас приветствует программа ВидеоДеск.Презентация";//request.getParameter( "welcomeMsg" );
-		String logoutURL = "/videodesk/jsp/connect.jsp";//request.getParameter( "logoutURL" );
+		String welcomeMsg = request.getParameter( "welcomeMsg" );
+		String logoutURL = "https://screen.kotelevsky.ru";//request.getParameter( "logoutURL" );
 		String viewerPW = request.getParameter( "viewerPW" );
 		String moderatorPW = request.getParameter( "moderatorPW" );
 		
-		String meeting_ID = createMeeting( meetingID, welcomeMsg, moderatorPW, "Helllllo", viewerPW, 0, logoutURL, "114");
+		String meeting_ID = createMeeting( meetingID, welcomeMsg, moderatorPW, "", viewerPW, 0, logoutURL, "");
 
 		if( meeting_ID.startsWith("Error ")) {
 %>
@@ -107,7 +118,7 @@
 <%
 			return;
 		}
-		String joinURL = getJoinMeetingURL(username, meetingID, password, "HELLLLLo");			
+		String joinURL = getJoinMeetingURL(username, meetingID, password, "");
 		//out.write(joinURL);
 %>
 

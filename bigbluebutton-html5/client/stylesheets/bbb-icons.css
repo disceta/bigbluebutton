@@ -65,7 +65,7 @@
   content: "\e920";
 }
 .icon-bbb-plus:before {
-  content: "\e921";
+  content: "\e94f";
 }
 .icon-bbb-fit_to_width:before {
   content: "\e922";
@@ -109,7 +109,7 @@
   content: "\e904";
 }
 .icon-bbb-user:before {
-  content: "\e905";
+  content: "\0020\0020\e94a";
 }
 .icon-bbb-up_arrow:before {
   content: "\e906";
@@ -118,7 +118,8 @@
   content: "\e90a";
 }
 .icon-bbb-presentation:before {
-  content: "\e90b";
+  /*content: "\e90b";*/
+  content: "\e94e";
 }
 .icon-bbb-listen:before {
   content: "\e90c";
@@ -166,6 +167,7 @@
 }
 .icon-bbb-hand:before {
   content: "\e90f";
+  color: chocolate;
 }
 .icon-bbb-undecided:before {
   content: "\e907";
